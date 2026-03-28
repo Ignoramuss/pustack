@@ -1,0 +1,88 @@
+---
+title: "Binary, Bits, and Data Representation"
+track: 1
+topic: 1
+prerequisites: []
+difficulty: "B"
+estimated_time: "2h"
+---
+
+# Binary, Bits, and Data Representation
+
+Everything in a computer—numbers, text, images, instructions—is ultimately represented as sequences of **bits**: ones and zeros. Understanding how data is encoded at this fundamental level is the foundation of all computing.
+
+## Why Binary?
+
+Computers are built from transistors, tiny switches that are either **on** (1) or **off** (0). By combining millions of these switches, we can represent any data. A single bit holds one of two values. Group 8 bits together and you get a **byte**, which can represent 256 distinct values (2⁸ = 256).
+
+## Number Systems
+
+We use multiple number systems to represent the same underlying binary data:
+
+| System | Base | Digits | Example |
+|---|---|---|---|
+| **Binary** | 2 | 0, 1 | `0b00101010` |
+| **Octal** | 8 | 0–7 | `0o52` |
+| **Decimal** | 10 | 0–9 | `42` |
+| **Hexadecimal** | 16 | 0–9, A–F | `0x2A` |
+
+Hexadecimal is especially useful because each hex digit maps to exactly 4 bits (a **nibble**), making it compact to read and write.
+
+## Interactive Converter
+
+Toggle individual bits and watch the value update across binary, decimal, hex, and octal:
+
+<BinaryConverter />
+
+## Signed Integers: Two's Complement
+
+How do we represent negative numbers with only 0s and 1s? Modern computers use **two's complement**:
+
+1. The most significant bit (MSB) acts as the **sign bit**: 0 = positive, 1 = negative.
+2. To negate a number: flip all bits, then add 1.
+3. This gives us a range of **−128 to 127** for 8-bit signed integers.
+
+The beauty of two's complement is that addition works the same for both signed and unsigned numbers—no special hardware needed.
+
+<TwosComplement />
+
+## Floating Point: IEEE 754
+
+Real numbers (like 3.14 or 0.001) are stored using the **IEEE 754** standard. A 32-bit float is divided into three fields:
+
+- **Sign** (1 bit): determines positive or negative
+- **Exponent** (8 bits): the power of 2, stored with a bias of 127
+- **Mantissa** (23 bits): the fractional part, with an implicit leading 1
+
+The formula is: **(-1)^sign × 2^(exponent - 127) × (1 + mantissa)**
+
+Special values include ±Infinity (exponent all 1s, mantissa 0) and NaN (exponent all 1s, mantissa non-zero).
+
+<Ieee754Viewer />
+
+## Character Encoding: ASCII and UTF-8
+
+Text is stored as numbers mapped to characters:
+
+- **ASCII** uses 7 bits (0–127) to represent English letters, digits, and symbols.
+- **UTF-8** is a variable-length encoding that is backwards-compatible with ASCII:
+  - 1 byte for ASCII characters (U+0000–U+007F)
+  - 2 bytes for Latin, Greek, Cyrillic, etc. (U+0080–U+07FF)
+  - 3 bytes for most world scripts and symbols (U+0800–U+FFFF)
+  - 4 bytes for emoji and rare characters (U+10000–U+10FFFF)
+
+<CharacterEncoding />
+
+## Key Takeaways
+
+- All data in computers is binary: sequences of 0s and 1s.
+- **Hex** is a compact way to read binary (each digit = 4 bits).
+- **Two's complement** lets us represent negative integers using the same addition circuits.
+- **IEEE 754** encodes floating-point numbers with sign, exponent, and mantissa fields.
+- **UTF-8** is the dominant text encoding, using 1–4 bytes per character.
+
+## Exercises
+
+Test your understanding of binary conversion, two's complement, and character encoding:
+
+<BinaryExercises />
