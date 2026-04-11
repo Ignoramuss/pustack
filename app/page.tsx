@@ -18,6 +18,14 @@ export default function Home(): React.ReactElement {
               1.01 Binary, Bits, and Data Representation
             </Link>
           </li>
+          <li>
+            <Link
+              href="/tracks/1-bare-metal/2-logic-gates-and-boolean-algebra"
+              className="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] underline"
+            >
+              1.02 Logic Gates and Boolean Algebra
+            </Link>
+          </li>
         </ul>
       </section>
     </div>
