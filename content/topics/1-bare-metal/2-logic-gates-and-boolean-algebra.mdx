@@ -1,0 +1,117 @@
+---
+title: "Logic Gates and Boolean Algebra"
+track: 1
+topic: 2
+prerequisites: [1]
+difficulty: "B"
+estimated_time: "2h"
+---
+
+# Logic Gates and Boolean Algebra
+
+In Topic 1.01 we learned that computers represent everything as bits. But how do computers actually **compute** with those bits? The answer is **logic gates**—tiny circuits built from transistors that perform Boolean operations on binary inputs.
+
+## From Transistors to Gates
+
+A single transistor acts as a switch: apply a voltage to its gate and current flows. By combining two or more transistors in clever arrangements, we build **logic gates** that implement Boolean functions:
+
+- **Series transistors** → AND behavior (both must be on)
+- **Parallel transistors** → OR behavior (either can be on)
+- **Inverter** → NOT behavior (flip the signal)
+
+Every digital circuit—from a pocket calculator to a modern CPU—is built entirely from these fundamental gates.
+
+## The Six Core Gates
+
+There are six gates you need to know. Each takes one or two binary inputs and produces one binary output:
+
+| Gate | Symbol | Rule |
+|------|--------|------|
+| **AND** | A · B | Output 1 only when **both** inputs are 1 |
+| **OR** | A + B | Output 1 when **any** input is 1 |
+| **NOT** | ¬A | Inverts the input |
+| **XOR** | A ⊕ B | Output 1 when inputs are **different** |
+| **NAND** | ¬(A · B) | Inverse of AND—the "universal gate" |
+| **NOR** | ¬(A + B) | Inverse of OR—also a universal gate |
+
+**NAND and NOR are special**: any other gate can be built using only NAND gates (or only NOR gates). This is why they're called **universal gates** and why real chips are often built predominantly from NAND or NOR transistor arrangements.
+
+### Explore Each Gate
+
+Toggle the inputs below to see how each gate responds. Expand the truth table to see all combinations:
+
+<LogicGateExplorer />
+
+## Boolean Algebra
+
+Boolean algebra gives us a mathematical framework for reasoning about logic circuits. The key laws are:
+
+### Identity and Null
+- **Identity:** A · 1 = A, A + 0 = A
+- **Null:** A · 0 = 0, A + 1 = 1
+
+### Complement
+- A · ¬A = 0
+- A + ¬A = 1
+
+### Commutative, Associative, Distributive
+- **Commutative:** A · B = B · A, A + B = B + A
+- **Associative:** (A · B) · C = A · (B · C)
+- **Distributive:** A · (B + C) = (A · B) + (A · C)
+
+### De Morgan's Laws
+
+These are the most important laws for simplifying circuits:
+
+- **¬(A · B) = ¬A + ¬B** — "break the AND, flip to OR, negate each term"
+- **¬(A + B) = ¬A · ¬B** — "break the OR, flip to AND, negate each term"
+
+De Morgan's laws explain why NAND and NOR are universal: a NAND gate is equivalent to an OR gate with inverted inputs, and a NOR gate is equivalent to an AND gate with inverted inputs.
+
+## Building Circuits: The Half-Adder
+
+Now let's combine gates to do something useful: **binary addition**.
+
+A **half-adder** adds two single-bit numbers A and B. It produces two outputs:
+- **Sum** = A XOR B (the result bit)
+- **Carry** = A AND B (the overflow bit)
+
+| A | B | Sum | Carry |
+|---|---|-----|-------|
+| 0 | 0 | 0 | 0 |
+| 0 | 1 | 1 | 0 |
+| 1 | 0 | 1 | 0 |
+| 1 | 1 | 0 | 1 |
+
+Notice that 1 + 1 = 10 in binary (Sum=0, Carry=1), just like how 5 + 5 = 10 in decimal.
+
+## The Full-Adder
+
+A half-adder can't handle a **carry-in** from a previous addition. A **full-adder** fixes this by taking three inputs: A, B, and Cin (carry-in).
+
+- **Sum** = A XOR B XOR Cin
+- **Cout** = (A AND B) OR ((A XOR B) AND Cin)
+
+A full-adder is built from two half-adders and an OR gate. By chaining N full-adders together (connecting each Cout to the next Cin), you get an **N-bit ripple-carry adder**—the foundation of ALU addition in every CPU.
+
+## Interactive Circuit Builder
+
+Use the circuit builder below to explore how gates connect into circuits. Try loading the **Half Adder** or **Full Adder** presets and toggling the inputs to watch signals propagate through the circuit in real-time:
+
+<CircuitBuilder />
+
+## Key Takeaways
+
+- **Logic gates** (AND, OR, NOT, XOR, NAND, NOR) are the fundamental building blocks of all digital circuits.
+- **NAND and NOR** are universal gates—any circuit can be built from just one type.
+- **Boolean algebra** lets us simplify and reason about circuits mathematically.
+- **De Morgan's laws** are essential for circuit simplification.
+- A **half-adder** adds two bits using XOR and AND gates.
+- A **full-adder** handles carry-in and is the building block of multi-bit addition.
+- Chaining full-adders creates a **ripple-carry adder**, the basis of CPU arithmetic.
+
+## Exercises
+
+Test your understanding of logic gates, Boolean algebra, and adder circuits:
+
+<LogicGatesExercises />
